@@ -10,7 +10,7 @@ As an additional constraint, the circuit was built using only trough hole compon
 
 # Theory of operation
 
-In general the circuit can be presented as follows (for full circuit schematic, refer to [circuit documentation](Documentation/TheDAC.pdf)):
+In general the circuit can be presented as follows (for full circuit schematic, refer to [circuit documentation](Documentation/TheDAC_v1.pdf)):
 
 ![Block diagram](Grapgics/BlockDiagram.svg)
 
@@ -52,7 +52,7 @@ Some basic logic functions such as hours reset logic AND circuit and seconds res
 
 As mentioned previously, seconds (6 bits), minutes (6 bits) and hours (5 bits) counters output their count values in parallel binary format. These outputs are used to drive 3 digital to analog converters (DAC) that are implemented as simple R-2R resistor ladders.
 
-The analog voltage signals from R-2R DACs are then connected to the current driver inputs. A single current driver is implemented using one of four operational amplifier blocks of the LMC6486 Quad Op-Amp IC (U10). Each Op-Amp block amplifies the voltage difference between its two inputs: `V_out = G * (V(+) - V(-))`, where `G` is amplifier gain (usually a very large number). So if the `V(+)` input goes higher than `V(-)` the Op-Amp output `V_out` will also pull higher and vice versa.
+The analog voltage signals from R-2R DACs are then connected to the current driver inputs. A single current driver is implemented using one of four operational amplifier blocks of the LMC6484 Quad Op-Amp IC (U10). Each Op-Amp block amplifies the voltage difference between its two inputs: `V_out = G * (V(+) - V(-))`, where `G` is amplifier gain (usually a very large number). So if the `V(+)` input goes higher than `V(-)` the Op-Amp output `V_out` will also pull higher and vice versa.
 
 The R-2R DAC output signal is fed in to the Op-Amp `V(+)` input, while its output is wired through an analog micro ampere meter in to its `V(-)` and then through a variable resistor to ground, forming a negative feedback loop. In this configuration the Op-Amp will drive its output so that the `V(-)` input voltage (voltage drop across the adjustable resistor) is effectively equal to `V(+)` input voltage.
 
